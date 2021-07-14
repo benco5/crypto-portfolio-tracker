@@ -1,12 +1,18 @@
 class HomeController < ApplicationController
 
   def index
-    @url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{ENV['CMC_PRO_API_KEY']}"
-    @uri = URI(@url)
-    @response = Net::HTTP.get(@uri)
-    @coins = JSON.parse(@response)["data"]
+    @coins = helpers.crypto_listings_api_call
+    @topten = @coins.select { |coin| coin["cmc_rank"] <= 10 }
   end
 
   def about
+  end
+
+  def lookup
+    @symbol = params[:crypto_symbol]
+    if @symbol
+      @coins = helpers.crypto_listings_api_call
+      @coin = @coins.select { |coin| coin["symbol"] == @symbol.upcase}[0] || {}
+    end
   end
 end
