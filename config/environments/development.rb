@@ -1,5 +1,8 @@
 require "active_support/core_ext/integer/time"
 
+require 'webmock'
+include WebMock::API
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -73,4 +76,16 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+  
+  # Controlling the mock request to Coin Market Cap API to avoid unnecessary calls in 
+  # development mode (potential throttling, etc...) but still provide mechanism for
+  # easy access to live calls through USE_API_MOCK=[yes/whatever] toggle in .env file.
+  if ENV['USE_API_MOCK'] && ENV['USE_API_MOCK'] == 'yes'
+    WebMock.enable!
+    puts "=> *** Mock CMC API request is enabled! (See config/development.rb and .env) ***"
+    raw_response_file = File.new(Rails.root.join('test', 'mocks', 'cmc_api_response_output.txt'))
+    stub_request(:get, /coinmarketcap/).to_return(raw_response_file)
+  else
+    WebMock.disable!
+  end
 end

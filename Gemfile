@@ -25,6 +25,9 @@ gem 'dotenv-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Using 'webmock' for mocking API call (optionally) in development mode and anticipate
+  # using it in test as well
+  gem "webmock"
 end
 
 group :development do
