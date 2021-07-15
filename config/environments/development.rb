@@ -86,6 +86,9 @@ Rails.application.configure do
     raw_response_file = File.new(Rails.root.join('test', 'mocks', 'cmc_api_response_output.txt'))
     stub_request(:get, /coinmarketcap/).to_return(raw_response_file)
   else
-    WebMock.disable!
+    WebMock.disable! 
   end
+
+  # Required by devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
