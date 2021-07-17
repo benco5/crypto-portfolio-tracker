@@ -1,10 +1,10 @@
 <h1>Cryptos</h1>
+<br/>
 
-<table>
+<table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Symbol</th>
-      <th>User</th>
       <th>Cost per</th>
       <th>Amount owned</th>
       <th colspan="3"></th>
@@ -15,12 +15,11 @@
     <% @cryptos.each do |crypto| %>
       <tr>
         <td><%= crypto.symbol %></td>
-        <td><%= crypto.user_id %></td>
         <td><%= crypto.cost_per %></td>
         <td><%= crypto.amount_owned %></td>
-        <td><%= link_to 'Show', crypto %></td>
-        <td><%= link_to 'Edit', edit_crypto_path(crypto) %></td>
-        <td><%= link_to 'Destroy', crypto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', crypto, class: 'btn btn-default'%></td>
+        <td><%= link_to 'Edit', edit_crypto_path(crypto), class: 'btn btn-default' %></td>
+        <td><%= link_to 'Destroy', crypto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Crypto', new_crypto_path %>
+<%= link_to 'New Crypto', new_crypto_path, role: 'button', class: 'btn btn-default' %>

@@ -1,22 +1,23 @@
-<p>
-  <strong>Symbol:</strong>
-  <%= @crypto.symbol %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">Details</div>
+  <div class="panel-body">
+    <p>
+      <strong>Symbol:</strong>
+      <%= @crypto.symbol %>
+    </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @crypto.user_id %>
-</p>
+    <p>
+      <strong>Cost per:</strong>
+      <%= @crypto.cost_per %>
+    </p>
 
-<p>
-  <strong>Cost per:</strong>
-  <%= @crypto.cost_per %>
-</p>
-
-<p>
-  <strong>Amount owned:</strong>
-  <%= @crypto.amount_owned %>
-</p>
-
-<%= link_to 'Edit', edit_crypto_path(@crypto) %> |
-<%= link_to 'Back', cryptos_path %>
+    <p>
+      <strong>Amount owned:</strong>
+      <%= @crypto.amount_owned %>
+    </p>
+  </div>
+  <div class="panel-footer">
+    <%= link_to 'Edit', edit_crypto_path(@crypto) %> |
+    <%= link_to 'Back', cryptos_path %>
+  </div>
+</div>

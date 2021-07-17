@@ -13,25 +13,25 @@
 
   <div class="field">
     <%= form.label :symbol %>
-    <%= form.text_field :symbol %>
+    <%= form.text_field :symbol, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field hidden">
     <%= form.label :user_id %>
-    <%= form.number_field :user_id, value: current_user.id %>
+    <%= form.number_field :user_id, value: current_user.id, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= form.label :cost_per %>
-    <%= form.text_field :cost_per %>
+    <%= form.text_field :cost_per, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= form.label :amount_owned %>
-    <%= form.text_field :amount_owned %>
+    <%= form.text_field :amount_owned, class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-default" %>
   </div>
 <% end %>

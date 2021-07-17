@@ -1,5 +1,10 @@
-<h1>New Crypto</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">New Crypto</div>
+  <div class="panel-body">
+    <%= render 'form', crypto: @crypto %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to 'Back', cryptos_path %>
+  </div>
+</div>
 
-<%= render 'form', crypto: @crypto %>
-
-<%= link_to 'Back', cryptos_path %>
