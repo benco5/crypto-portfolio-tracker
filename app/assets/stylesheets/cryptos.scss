@@ -1,3 +1,16 @@
 // Place all the styles related to the cryptos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+table {
+  border-style: ridge;
+  border-width: 150px;
+  border-color: #c3c9ba;
+  background-color: #ffffff;
+}
+th {
+  border: 5px solid #095484;
+}
+td {
+  border: 20px groove #1c87c9;
+}

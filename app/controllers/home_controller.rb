@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
     @coins = helpers.crypto_listings_api_call
-    @topten = @coins.select { |coin| coin["cmc_rank"] <= 10 }
+    @topranked = @coins.select { |coin| coin["cmc_rank"] <= 12 }.sort_by { |coin| coin['cmc_rank'] }
   end
 
   def about

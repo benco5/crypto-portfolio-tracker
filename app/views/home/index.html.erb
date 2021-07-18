@@ -1,6 +1,27 @@
-<h1>Home Page</h1>
-<ul>
-  <% @topten.each do |coin| %>
-    <li><%= coin["name"] %> (<%= coin["symbol"] %>)</li>
-  <% end %>
-</ul>
+<h1>Top Ranked</h1>
+<br/>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Current Market Price (USD)</th>
+      <th>Current Rank</th>      
+      <th>Pct. Change (1h)</th>
+      <th>Pct. Change (24h)</th>
+      <th>Pct. Change (7d)</th>
+  </thead>
+
+  <tbody>
+    <% @topranked.each do |crypto| %>
+      <tr>
+        <td><%= crypto['name'] %> (<%= crypto['symbol']%>) </td>         
+        <td><%= crypto['quote']['USD']['price'].to_d.round(8) %></td>
+        <td><%= crypto['cmc_rank'] %></td>
+        <td><%= crypto['quote']['USD']['percent_change_1h'].round(2) %></td>
+        <td><%= crypto['quote']['USD']['percent_change_24h'].round(2) %></td>
+        <td><%= crypto['quote']['USD']['percent_change_7d'].round(2) %></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

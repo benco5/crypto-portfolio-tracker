@@ -11,10 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :symbol %>
-    <%= form.text_field :symbol, class: "form-control" %>
-  </div>
+  <% unless params[:action] == "edit" %>
+    <div class="field">
+      <%= form.label :symbol %>
+      <%= form.text_field :symbol, class: "form-control" %>
+    </div>
+  <% end %>
 
   <div class="field hidden">
     <%= form.label :user_id %>

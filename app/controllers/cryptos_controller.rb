@@ -3,15 +3,18 @@ class CryptosController < ApplicationController
   before_action :correct_user?, only: %i[ show edit update destroy ]
   before_action :set_crypto, only: %i[ show edit update destroy ]
   before_action :created_by_current_user?, only: %i[ create ]
+  before_action :redirect_if_invalid_symbol, only: %i[ create ]
 
   # GET /cryptos or /cryptos.json
   def index
     @cryptos = current_user.cryptos
-    # crypto_listings_api_call
+    @crypto_listings = helpers.crypto_listings_api_call
+    @total_profit_loss = 0
   end
 
   # GET /cryptos/1 or /cryptos/1.json
   def show
+    @crypto_name = params[:crypto_name]
   end
 
   # GET /cryptos/new
@@ -21,6 +24,7 @@ class CryptosController < ApplicationController
 
   # GET /cryptos/1/edit
   def edit
+    @crypto_name = params[:crypto_name]
   end
 
   # POST /cryptos or /cryptos.json
@@ -85,4 +89,17 @@ class CryptosController < ApplicationController
     def crypto_params
       params.require(:crypto).permit(:symbol, :user_id, :cost_per, :amount_owned)
     end
+
+    def redirect_if_invalid_symbol
+      @crypto_listings = helpers.crypto_listings_api_call
+      @crypto_listings.each do |listing|
+        if listing['symbol'] == params[:crypto][:symbol].upcase
+          return
+        end
+      end
+      
+      redirect_to cryptos_path, notice: "Unable to add #{params[:crypto][:symbol]}."
+      return
+    end
+
 end

@@ -1,16 +1,22 @@
-<h3>Crypto Currency Lookup</h3>
+<h1>Search Crypto</h1>
 <br/>
+
 <%= form_with url: home_lookup_path do |f| %>
-  <%= f.text_field :crypto_symbol, placeholder: 'Enter a symbol' %>
-  <%= f.submit "Smash here!" %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.text_field :crypto_symbol, placeholder: 'Enter a symbol', class: "form-control" %>
+      <%= f.submit "Smash here!", class: 'btn btn-default' %>
+    </div>
+  </div>
 <% end %>
 <br/><br/>
 
 <% if @coin && @coin.empty? %>
   <% if !@symbol.empty? %>
-    <div><%= @symbol %> not found.</div>
+    <% flash[:notice] = @symbol + " not found\n" %>
+  <% else %>
+    <% flash[:notice] = "Please enter a valid symbol!" %>
   <% end %>
-  <div>Please enter a valid symbol!</div>
 <% elsif @coin %>
   <%= render 'home/single_coin_info_panel' %>
 <% end %>

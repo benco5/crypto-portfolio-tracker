@@ -1,30 +1,48 @@
-<h1>Cryptos</h1>
+<h1>Your Portfolio</h1>
 <br/>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th>Symbol</th>
-      <th>Cost per</th>
-      <th>Amount owned</th>
-      <th colspan="3"></th>
+      <th>Name</th>
+      <th>Current Market Price (USD)</th>
+      <th>Current Rank</th>      
+      <th>Pct. Change (1h)</th>
+      <th>Pct. Change (24h)</th>
+      <th>Pct. Change (7d)</th>
+      <th>Current Value (USD)
+      <th>Average Cost (USD)</th>
+      <th>Total Return (USD)</th>
+      <th>Quantity Owned</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @cryptos.each do |crypto| %>
-      <tr>
-        <td><%= crypto.symbol %></td>
-        <td><%= crypto.cost_per %></td>
-        <td><%= crypto.amount_owned %></td>
-        <td><%= link_to 'Show', crypto, class: 'btn btn-default'%></td>
-        <td><%= link_to 'Edit', edit_crypto_path(crypto), class: 'btn btn-default' %></td>
-        <td><%= link_to 'Destroy', crypto, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %></td>
-      </tr>
+    <% @crypto_listings.sort_by { |x| x['cmc_rank'] }.each do |listing| %>
+      <% @cryptos.each do |crypto| %>
+        <% if crypto.symbol.upcase == listing['symbol'] %>
+          <tr>
+            <td><%= link_to "#{listing['name']} (#{listing['symbol']})", crypto_path(crypto, :crypto_name => listing['name']) %></td>         
+            <td><%= listing['quote']['USD']['price'].to_d.round(8) %></td>
+            <td><%= listing['cmc_rank'] %></td>
+            <td><%= listing['quote']['USD']['percent_change_1h'].round(2) %></td>
+            <td><%= listing['quote']['USD']['percent_change_24h'].round(2) %></td>
+            <td><%= listing['quote']['USD']['percent_change_7d'].round(2) %></td>
+            <td><%= (listing['quote']['USD']['price'].to_d * crypto.amount_owned).round(8) %></td>            
+            <td><%= crypto.cost_per.round(8) %></td>
+            <td><%= ((listing['quote']['USD']['price'].to_d - crypto.cost_per) * crypto.amount_owned).round(8) %></td>
+            <td><%= crypto.amount_owned.round(8) %></td>
+            <% @total_profit_loss += ((listing['quote']['USD']['price'].to_d - crypto.cost_per) * crypto.amount_owned) %>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<strong>Total Portfolio Revenue (USD): </strong><%= @total_profit_loss.round(8) %>
+<br/>
+<br/>
+<br/>
 
 <%= link_to 'New Crypto', new_crypto_path, role: 'button', class: 'btn btn-default' %>

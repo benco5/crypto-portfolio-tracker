@@ -1,28 +1,24 @@
 <div class="panel panel-default">
-  <table class="table">
-    <tr>
-      <td>Price (USD):</td><td>$<%= @coin['quote']['USD']['price'].round(2) %></td>
-    </tr>
-    <tr>
-      <td>Volume (24h):</td><td><%= @coin['quote']['USD']['volume_24h'].round(2) %></td>
-    </tr>
-    <tr>
-      <td>Pct. Change (1h):</td><td><%= @coin['quote']['USD']['percent_change_1h'].round(2) %></td>
-    </tr>
-    <tr>
-      <td>Pct. Change (24h):</td><td><%= @coin['quote']['USD']['percent_change_24h'].round(2) %></td>
-    </tr>
-    <tr>
-      <td>Pct. Change (7d):</td><td><%= @coin['quote']['USD']['percent_change_7d'].round(2) %></td>
-    </tr>
-    <tr>
-      <td>Pct. Change (30d):</td><td><%= @coin['quote']['USD']['percent_change_30d'].round(2) %></td>
-    </tr>
-    <tr>
-      <td>Market Cap (USD):</td><td><%= (@coin['quote']['USD']['market_cap'] / 1000000).round() %> MM</td>
-    </tr>
-    <tr>
-      <td>Last Updated:</td><td><%= @coin['quote']['USD']['last_updated'] %></td>
-    </tr> 
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Current Market Price (USD)</th>
+        <th>Current Rank</th>      
+        <th>Pct. Change (1h)</th>
+        <th>Pct. Change (24h)</th>
+        <th>Pct. Change (7d)</th>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @coin['name'] %> (<%= @coin['symbol']%>) </td>         
+        <td><%= @coin['quote']['USD']['price'].to_d.round(8) %></td>
+        <td><%= @coin['cmc_rank'] %></td>
+        <td><%= @coin['quote']['USD']['percent_change_1h'].round(2) %></td>
+        <td><%= @coin['quote']['USD']['percent_change_24h'].round(2) %></td>
+        <td><%= @coin['quote']['USD']['percent_change_7d'].round(2) %></td>        
+      </tr>
+    </tbody>
   </table>
 </div>
