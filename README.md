@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Cryptocurrency portfolio tracking app built with Ruby on Rails 6, [Coin Market Cap API](https://coinmarketcap.com/api/) and deployed to [Heroku](https://floating-eyrie-80510.herokuapp.com/) (please allow a minute for the free-tier instance to spin up).
 
-Things you may want to cover:
+This is a tutorial project with a few enhancements / modifications of my own built for the purpose of refreshing and updating my RoR skills/knowledge.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Enjoy!

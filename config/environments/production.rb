@@ -119,5 +119,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   # Required by devise; hostname must be updated to production host
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'floating-eyrie-80510.herokuapp.com' }
 end
